@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 #define L 0
 #define S 1
@@ -52,21 +53,8 @@ struct _block
 
 struct _block **cache;
 
-void (*load_cache)();
-void (*store_cache)();
-void (*policies)();
-
-int addr_to_int(char *str);
-
 void init();
 void run();
 
-int load_from_mem();
-
-void load_direct_mapped();
-void load_set_associative();
-void load_fully_associative();
-
-void store_direct_mapped();
-void store_set_associative();
-void store_fully_associative();
+void load_cache();
+void store_cache();

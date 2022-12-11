@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
     scanf("%s ", buffer);
     strcpy(address, buffer);
     scanf("%s ", buffer);
-    if (strlen(address) < 10)
+    if (strcmp(type, "l") && strcmp(type, "s"))
       break;
 
-    // printf("%s %s\n", type, address);
     instruction.type = !strcmp(type, "l") ? L : S;
     instruction.address = strtol(address, NULL, 0);
-    // printf("%s %s\n",type,address);
     run();
   }
+
+  // result
   printf("Total_loads: %d\n", info.Total_loads);
   printf("Total_stores: %d\n", info.Total_stores);
   printf("Load_hits: %d\n", info.Load_hits);
@@ -74,7 +74,7 @@ void set_setting(char *str[])
     setting.sets = sets;
   else
   {
-    printf("1\n");
+    printf("sets error\n");
     show_help();
   }
 
@@ -82,17 +82,17 @@ void set_setting(char *str[])
     setting.blocks = blocks;
   else
   {
-    printf("2\n");
+    printf("blocks error\n");
     show_help();
   }
-  if (bytes > 0 && is_power(bytes))
+  if (bytes >= 4 && is_power(bytes))
   {
     setting.bytes = bytes;
     setting.rate = bytes / 4;
   }
   else
   {
-    printf("3\n");
+    printf("bytes error\n");
     show_help();
   }
   if (!strcmp(str[3], "write-allocate"))
@@ -101,7 +101,7 @@ void set_setting(char *str[])
     setting.allo = NO_WRITE_ALLOCATE;
   else
   {
-    printf("4\n");
+    printf("allocate error\n");
     show_help();
   }
   if (!strcmp(str[4], "write-through"))
@@ -110,7 +110,7 @@ void set_setting(char *str[])
     setting.write = WRITE_BACK;
   else
   {
-    printf("5\n");
+    printf("write error\n");
     show_help();
   }
   if (!strcmp(str[5], "lru"))
@@ -121,7 +121,7 @@ void set_setting(char *str[])
     setting.policies = RANDOM;
   else
   {
-    printf("6\n");
+    printf("policies error\n");
     show_help();
   }
 }

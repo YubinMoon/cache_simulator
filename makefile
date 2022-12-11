@@ -1,5 +1,5 @@
 csim : csim.o cache.o
-	gcc -o csim csim.o cache.o
+	gcc -o csim csim.o cache.o -lm
 
 cache.o : cache.c cache.h
 	gcc -c -o cache.o cache.c
